@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Layout from './layouts/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import Preloader from './components/Preloader';
+import logo from './assets/veraamtech-logo.webp';
 
 // Lazy loading pages
 const Home = lazy(() => import('./pages/Home'));
@@ -18,10 +19,12 @@ const Blog = lazy(() => import('./pages/Blog'));
 const Contact = lazy(() => import('./pages/Contact'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Loading component
+// Logo-only Loading component
 const LoadingScreen = () => (
   <div className="flex items-center justify-center min-h-screen bg-[#04091a]">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-400 border-solid"></div>
+    <div className="relative w-20 h-20 rounded-2xl bg-[#08152e] border border-cyan-400/30 flex items-center justify-center p-3 shadow-2xl animate-pulse">
+      <img src={logo} alt="Loading..." className="w-full h-full object-contain" />
+    </div>
   </div>
 );
 
