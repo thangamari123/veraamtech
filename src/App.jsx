@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Layout from './layouts/Layout';
 import ScrollToTop from './components/ScrollToTop';
+import Preloader from './components/Preloader';
 
 // Lazy loading pages
 const Home = lazy(() => import('./pages/Home'));
@@ -19,8 +20,8 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading component
 const LoadingScreen = () => (
-  <div className="flex items-center justify-center min-h-screen bg-white">
-    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-primary border-solid"></div>
+  <div className="flex items-center justify-center min-h-screen bg-[#04091a]">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-400 border-solid"></div>
   </div>
 );
 
@@ -28,6 +29,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <Preloader />
         <ScrollToTop />
         <Suspense fallback={<LoadingScreen />}>
           <Routes>
