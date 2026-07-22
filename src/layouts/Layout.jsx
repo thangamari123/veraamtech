@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import MobileBottomBar from '../components/MobileBottomBar';
+import DesktopWhatsAppButton from '../components/DesktopWhatsAppButton';
 
 const Layout = () => {
   return (
@@ -15,6 +16,9 @@ const Layout = () => {
 
       {/* Sticky Bottom Navigation Bar (Mobile Only) */}
       <MobileBottomBar />
+
+      {/* Floating WhatsApp Button (Desktop Only) */}
+      <DesktopWhatsAppButton />
     </div>
   );
 };
