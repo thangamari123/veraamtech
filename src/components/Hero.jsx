@@ -32,7 +32,6 @@ const Hero = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // fade out
       setVisible(false);
       setTimeout(() => {
         setWordIndex((prev) => (prev + 1) % cyclingWords.length);
@@ -61,28 +60,24 @@ const Hero = () => {
         />
       </div>
 
-
-
       {/* ── Ambient glow accents ── */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-600/10 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-cyan-500/8 blur-[120px] pointer-events-none" />
 
-
-
       {/* ═══════════════════════════════════════
-          MAIN CONTENT
+          MAIN CONTENT (Compact on Mobile)
       ═══════════════════════════════════════ */}
-      <div className="relative z-10 flex-1 flex items-center pt-24 sm:pt-28 md:pt-32 pb-24 sm:pb-28 md:pb-32">
-        <div className="container mx-auto px-5 md:px-8 max-w-7xl w-full">
+      <div className="relative z-10 flex-1 flex items-center pt-16 sm:pt-24 md:pt-28 pb-20 sm:pb-28 md:pb-32">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl w-full">
 
-          {/* Top eyebrow badge */}
+          {/* Top Eyebrow Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex justify-center mb-6"
+            className="flex justify-center mb-4 sm:mb-6"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-sm text-cyan-400 text-xs font-bold uppercase tracking-[0.25em]">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-sm text-cyan-400 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em]">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               India's #1 LED Display Solutions Provider
             </span>
@@ -90,11 +85,10 @@ const Hero = () => {
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-center font-heading font-black text-white leading-[1.08] tracking-tight mb-6
-                       text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5rem]"
+            className="text-center font-heading font-black text-white leading-[1.1] tracking-tight mb-4 sm:mb-6 text-xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
           >
             Premium{' '}
             <span className="relative inline-block">
@@ -103,63 +97,62 @@ const Hero = () => {
                   display: 'inline-block',
                   transition: 'opacity 0.4s ease, transform 0.4s ease',
                   opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateY(0)' : 'translateY(-12px)',
+                  transform: visible ? 'translateY(0)' : 'translateY(-10px)',
                 }}
                 className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent"
               >
                 {cyclingWords[wordIndex]}
               </span>
-              {/* underline accent */}
+              {/* Underline Accent */}
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
-                className="absolute -bottom-1 left-0 right-0 h-[3px] bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full origin-left"
+                className="absolute -bottom-1 left-0 right-0 h-[2px] sm:h-[3px] bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full origin-left"
               />
             </span>
             <br className="hidden sm:block" />
-            {' '}& Display Solutions
+            {' '}&amp; Display Solutions
           </motion.h1>
 
           {/* Sub-headline */}
           <motion.p
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="text-center text-gray-300 max-w-2xl mx-auto mb-4
-                       text-sm sm:text-base md:text-lg leading-relaxed"
+            className="text-center text-gray-300 max-w-xl sm:max-w-2xl mx-auto mb-4 text-xs sm:text-sm md:text-base leading-relaxed"
           >
             End-to-end visual communication solutions — from design and supply
             to precision installation and 24/7 support across India.
           </motion.p>
 
-          {/* Service tags */}
+          {/* Service Tags (Compact on Mobile) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-2 mb-10"
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-6 sm:mb-8 max-w-lg mx-auto"
           >
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[11px] md:text-xs font-semibold text-gray-400 border border-white/10 bg-white/5 px-3 py-1 rounded-full backdrop-blur-sm"
+                className="text-[9px] sm:text-[11px] md:text-xs font-semibold text-gray-300 border border-white/10 bg-white/5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full backdrop-blur-sm"
               >
                 {tag}
               </span>
             ))}
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons (Compact & Scaled on Mobile) */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row justify-center items-center gap-4"
+            className="flex flex-col sm:flex-row justify-center items-center gap-2.5 sm:gap-4 scale-90 sm:scale-100 origin-center"
           >
             <SpecularButton
-              size="lg"
-              radius={28}
+              size="md"
+              radius={24}
               tint="#0A3D91"
               tintOpacity={0.85}
               blur={8}
@@ -178,8 +171,8 @@ const Hero = () => {
             </SpecularButton>
 
             <SpecularButton
-              size="lg"
-              radius={28}
+              size="md"
+              radius={24}
               tint="#ffffff"
               tintOpacity={0.05}
               blur={12}
@@ -197,12 +190,12 @@ const Hero = () => {
             </SpecularButton>
           </motion.div>
 
-          {/* Trust line */}
+          {/* Trust Line */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="text-center text-gray-500 text-xs mt-6 tracking-wide"
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-center text-gray-500 text-[10px] sm:text-xs mt-4 sm:mt-6 tracking-wide"
           >
             Trusted by 500+ businesses across Chennai, Bangalore &amp; pan-India
           </motion.p>
@@ -211,52 +204,36 @@ const Hero = () => {
       </div>
 
       {/* ═══════════════════════════════════════
-          STATS BAR — pinned to bottom
+          STATS BAR — Pinned to Bottom
       ═══════════════════════════════════════ */}
       <div
         ref={ref}
         className="absolute bottom-0 left-0 right-0 z-20
                    bg-[#04091a]/95 backdrop-blur-lg
                    border-t border-white/[0.08]
-                   shadow-[0_-12px_40px_rgba(0,0,0,0.4)]"
+                   py-2 sm:py-3.5 px-3 sm:px-6"
       >
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat, i) => {
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 md:gap-8">
+            {stats.map((stat, index) => {
               const Icon = stat.icon;
-              const isLastInRow1 = i === 1; // right col, row 1 mobile
-              const isFirstRow = i < 2;     // top row mobile
               return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                  className={`
-                    flex flex-col items-center justify-center text-center
-                    py-3 md:py-5
-                    ${i < 3 ? 'lg:border-r lg:border-white/[0.08]' : ''}
-                    ${isFirstRow ? 'border-b border-white/[0.08] lg:border-b-0' : ''}
-                    ${isLastInRow1 ? '' : i === 0 ? 'border-r border-white/[0.08] lg:border-r-0' : ''}
-                    ${i === 2 ? 'border-r border-white/[0.08] lg:border-r-0' : ''}
-                  `}
+                <div
+                  key={index}
+                  className="flex items-center justify-center gap-2 sm:gap-3 p-1.5 sm:p-2"
                 >
-                  {/* Icon */}
-                  <div className="w-6 h-6 md:w-7 md:h-7 mb-1.5 rounded-md bg-blue-600/20 flex items-center justify-center">
-                    <Icon className="w-3 h-3 md:w-3.5 md:h-3.5 text-cyan-400" strokeWidth={2} />
+                  <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
-                  {/* Number */}
-                  <span className="text-xl sm:text-2xl md:text-3xl font-heading font-black text-white tracking-tight leading-none">
-                    {stat.value.replace('+', '')}
-                    {stat.value.includes('+') && (
-                      <span className="text-cyan-400">+</span>
-                    )}
-                  </span>
-                  {/* Label */}
-                  <p className="text-[8px] sm:text-[9px] md:text-[10px] text-gray-500 uppercase tracking-[0.15em] font-bold mt-1">
-                    {stat.label}
-                  </p>
-                </motion.div>
+                  <div>
+                    <span className="text-xs sm:text-base md:text-xl font-black font-heading text-white block leading-tight">
+                      {stat.value}
+                    </span>
+                    <span className="text-[9px] sm:text-xs text-gray-400 font-medium block truncate">
+                      {stat.label}
+                    </span>
+                  </div>
+                </div>
               );
             })}
           </div>
