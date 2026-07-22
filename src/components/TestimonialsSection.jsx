@@ -178,27 +178,27 @@ const TestimonialsSection = () => {
         {/* ── Carousel Track with Side Arrows ── */}
         <div className="relative max-w-[1400px] mx-auto px-4 md:px-12">
           
-          {/* Left Arrow Button */}
+          {/* Desktop Left Arrow Button */}
           <button
             onClick={scrollLeft}
-            aria-label="Previous Testimonials"
-            className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/5 hover:bg-cyan-500/20 border border-white/15 hover:border-cyan-400 text-white items-center justify-center transition-all z-20 shadow-lg"
+            aria-label="Previous Testimonial"
+            className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#050e1d] hover:bg-cyan-500/20 border border-white/20 hover:border-cyan-400 text-white items-center justify-center transition-all z-20 shadow-xl active:scale-95"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5 text-cyan-400" />
           </button>
 
-          {/* Right Arrow Button */}
+          {/* Desktop Right Arrow Button */}
           <button
             onClick={scrollRight}
-            aria-label="Next Testimonials"
-            className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/5 hover:bg-cyan-500/20 border border-white/15 hover:border-cyan-400 text-white items-center justify-center transition-all z-20 shadow-lg"
+            aria-label="Next Testimonial"
+            className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#050e1d] hover:bg-cyan-500/20 border border-white/20 hover:border-cyan-400 text-white items-center justify-center transition-all z-20 shadow-xl active:scale-95"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5 text-cyan-400" />
           </button>
 
           {/* Edge fade masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-[#030914] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-[#030914] to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 bg-gradient-to-r from-[#030914] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-24 bg-gradient-to-l from-[#030914] to-transparent z-10 pointer-events-none" />
 
           {/* Scrolling container */}
           <div
@@ -219,6 +219,34 @@ const TestimonialsSection = () => {
             </div>
           </div>
         </div>
+
+        {/* ── Manual Click Navigation Controls (Visible on Mobile & Desktop) ── */}
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <button
+            onClick={scrollLeft}
+            aria-label="Previous Testimonial Card"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#050e1d] border border-white/15 hover:border-cyan-400 text-cyan-400 text-xs font-bold shadow-lg active:scale-95 transition-all"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span>Prev</span>
+          </button>
+
+          <span className="text-[10px] sm:text-xs text-gray-400 font-medium uppercase tracking-wider">
+            Tap arrows to navigate
+          </span>
+
+          <button
+            onClick={scrollRight}
+            aria-label="Next Testimonial Card"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#050e1d] border border-white/15 hover:border-cyan-400 text-cyan-400 text-xs font-bold shadow-lg active:scale-95 transition-all"
+          >
+            <span>Next</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+
+      </div>
+    </section>
 
       </div>
     </section>
