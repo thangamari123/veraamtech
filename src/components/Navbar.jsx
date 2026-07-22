@@ -27,19 +27,19 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="fixed top-2 md:top-4 left-0 right-0 z-50 px-2.5 sm:px-4 md:px-8 flex justify-center w-full transition-all duration-300">
+    <header className="fixed top-3 md:top-4 left-0 right-0 z-50 px-3.5 sm:px-5 md:px-8 flex justify-center w-full transition-all duration-300">
       {/* Pill Container */}
-      <div className="w-full max-w-[1400px] bg-white rounded-full xl:rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-100 px-3.5 py-1.5 sm:px-5 sm:py-2 xl:px-6 xl:py-3 flex items-center justify-between">
+      <div className="w-full max-w-[1400px] bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-100 px-4 py-2 sm:px-5 sm:py-2.5 xl:px-6 xl:py-3 flex items-center justify-between">
         
         {/* Logo */}
-        <Link to="/" className="flex flex-shrink-0 items-center space-x-2 sm:space-x-3">
-          <img src={logo} alt="VEERAAM TECH Logo" className="h-7 sm:h-9 md:h-12 object-contain" />
+        <Link to="/" className="flex flex-shrink-0 items-center space-x-2.5 sm:space-x-3">
+          <img src={logo} alt="VEERAAM TECH Logo" className="h-8.5 sm:h-10 md:h-12 object-contain" />
           <div className="flex flex-col justify-center">
-            <span className="text-sm sm:text-lg md:text-2xl font-heading font-black tracking-tighter leading-none mb-0.5">
+            <span className="text-base sm:text-xl md:text-2xl font-heading font-black tracking-tighter leading-none mb-0.5">
               <span className="bg-gradient-to-b from-gray-500 to-gray-900 bg-clip-text text-transparent drop-shadow-sm">VEERAAM</span>{' '}
               <span className="bg-gradient-to-b from-cyan-500 to-blue-700 bg-clip-text text-transparent drop-shadow-sm">TECH</span>
             </span>
-            <span className="text-[6.5px] sm:text-[8px] md:text-[9px] tracking-[0.18em] text-gray-500 font-semibold uppercase">
+            <span className="text-[7.5px] sm:text-[8.5px] md:text-[9px] tracking-[0.18em] text-gray-500 font-semibold uppercase">
               LED Video Wall Manufacturer
             </span>
           </div>
@@ -145,13 +145,13 @@ const Navbar = () => {
           </SpecularButton>
         </div>
 
-        {/* Mobile Menu Button (Compact on mobile) */}
+        {/* Mobile Menu Button (Proportional on mobile) */}
         <button
-          className="xl:hidden text-gray-900 bg-gray-50/80 hover:bg-gray-100 p-1.5 sm:p-2 rounded-lg transition-colors border border-gray-100"
+          className="xl:hidden text-gray-900 bg-gray-50/80 hover:bg-gray-100 p-2 sm:p-2.5 rounded-xl transition-colors border border-gray-100"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Mobile Menu"
         >
-          {isOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
+          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
