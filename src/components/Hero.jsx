@@ -72,7 +72,7 @@ const Hero = () => {
       {/* ═══════════════════════════════════════
           MAIN CONTENT
       ═══════════════════════════════════════ */}
-      <div className="relative z-10 flex-1 flex items-center pt-16 sm:pt-20 pb-16 sm:pb-20 md:pb-24">
+      <div className="relative z-10 flex-1 flex items-center pt-24 sm:pt-28 md:pt-32 pb-24 sm:pb-28 md:pb-32">
         <div className="container mx-auto px-5 md:px-8 max-w-7xl w-full">
 
           {/* Top eyebrow badge */}
