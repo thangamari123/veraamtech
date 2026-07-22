@@ -247,9 +247,6 @@ const TestimonialsSection = () => {
 
       </div>
     </section>
-
-      </div>
-    </section>
   );
 };
 
