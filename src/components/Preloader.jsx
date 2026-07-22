@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/veraamtech-logo.webp';
+import { Sparkles, Plus } from 'lucide-react';
 
 const loadingSteps = [
   'Initializing LED Display Systems...',
@@ -20,7 +21,7 @@ const Preloader = () => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => setIsLoading(false), 400); // smooth fade out
+          setTimeout(() => setIsLoading(false), 500); // smooth fade out
           return 100;
         }
         const next = prev + Math.floor(Math.random() * 8) + 4;
@@ -45,24 +46,52 @@ const Preloader = () => {
       {isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.6, ease: 'easeInOut' } }}
+          exit={{ opacity: 0, scale: 1.05, transition: { duration: 0.6, ease: 'easeInOut' } }}
           className="fixed inset-0 z-[9999] bg-[#04091a] flex flex-col items-center justify-center p-4 overflow-hidden select-none"
         >
           {/* Ambient Background Glow Orbs */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-blue-600/15 blur-[140px] pointer-events-none" />
-          <div className="absolute top-1/3 right-1/4 w-[350px] h-[350px] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-blue-600/15 blur-[150px] pointer-events-none" />
+          <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none" />
 
-          {/* Center Brand Block */}
+          {/* Center Brand & Logo Effect Container */}
           <div className="relative z-10 text-center max-w-sm w-full flex flex-col items-center">
             
-            {/* Logo Container with Glowing Ring */}
-            <div className="relative mb-6">
-              {/* Outer Pulsing Cyan Ring */}
-              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-r from-blue-600 via-cyan-400 to-sky-500 opacity-30 blur-md animate-pulse" />
+            {/* LOGO PLUS EFFECT CONTAINER */}
+            <div className="relative mb-8 flex items-center justify-center">
               
-              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#08152e] border border-cyan-400/30 flex items-center justify-center p-3 shadow-2xl">
-                <img src={logo} alt="VEERAAM TECH" className="w-full h-full object-contain" />
+              {/* Outer Continuous Rotating Conic Gradient Ring */}
+              <div className="absolute -inset-4 rounded-3xl bg-[conic-gradient(from_0deg,#00f2fe,#0072ff,#9b51e0,#00f2fe)] animate-[spin_5s_linear_infinite] opacity-60 blur-sm" />
+
+              {/* Pulsing Cyan Radial Light Aura */}
+              <div className="absolute -inset-2 rounded-2xl bg-cyan-400/30 animate-pulse blur-md" />
+
+              {/* Orbiting Sparkle Plus Accent Icons */}
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                className="absolute -inset-8 pointer-events-none"
+              >
+                <Plus className="absolute top-0 left-2 w-4 h-4 text-cyan-400 animate-pulse" />
+                <Plus className="absolute bottom-0 right-2 w-4 h-4 text-blue-400 animate-pulse" />
+                <Sparkles className="absolute top-2 right-0 w-3.5 h-3.5 text-sky-300" />
+                <Sparkles className="absolute bottom-2 left-0 w-3.5 h-3.5 text-cyan-300" />
+              </motion.div>
+
+              {/* Main Logo Card Container */}
+              <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-[#071328] border border-cyan-400/40 flex items-center justify-center p-3.5 shadow-[0_0_30px_rgba(0,212,255,0.25)] overflow-hidden">
+                
+                {/* Logo Image */}
+                <img src={logo} alt="VEERAAM TECH" className="w-full h-full object-contain relative z-10" />
+
+                {/* Shimmer Light Reflection Sweep Line */}
+                <motion.div
+                  initial={{ x: '-100%' }}
+                  animate={{ x: '200%' }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                  className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 z-20 pointer-events-none"
+                />
               </div>
+
             </div>
 
             {/* Brand Title */}
@@ -79,10 +108,10 @@ const Preloader = () => {
               LED Video Wall Manufacturer
             </p>
 
-            {/* Smooth Loading Progress Bar */}
+            {/* Smooth Progress Bar */}
             <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden mb-4 relative p-0.5 border border-white/10">
               <motion.div
-                className="h-full bg-gradient-to-r from-blue-600 via-cyan-400 to-sky-300 rounded-full"
+                className="h-full bg-gradient-to-r from-blue-600 via-cyan-400 to-sky-300 rounded-full shadow-[0_0_10px_#00d4ff]"
                 style={{ width: `${progress}%` }}
                 transition={{ ease: 'easeOut' }}
               />
@@ -90,10 +119,10 @@ const Preloader = () => {
 
             {/* Progress Percentage & Status Text */}
             <div className="w-full flex items-center justify-between text-xs text-gray-400 font-mono">
-              <span className="text-[11px] text-gray-400 font-sans tracking-wide">
+              <span className="text-[11px] text-gray-400 font-sans tracking-wide truncate pr-2">
                 {loadingSteps[stepIndex]}
               </span>
-              <span className="font-bold text-cyan-400 ml-2">{progress}%</span>
+              <span className="font-bold text-cyan-400 flex-shrink-0">{progress}%</span>
             </div>
 
           </div>
