@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Shield, Award, Clock, Users } from 'lucide-react';
-import SpecularButton from './SpecularButton';
 import DotGrid from './DotGrid';
 import GradientText from './GradientText';
+import StarBorder from './StarBorder';
 
 const stats = [
   { value: '15+',   label: 'Years Experience',   icon: Award },
@@ -157,94 +157,36 @@ const Hero = () => {
             ))}
           </motion.div>
 
-          {/* CTA Buttons (Compact & Small on Mobile) */}
+          {/* CTA Buttons with StarBorder (Compact & Responsive) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-row flex-wrap justify-center items-center gap-2 sm:gap-4"
+            className="flex flex-row flex-wrap justify-center items-center gap-3 sm:gap-4"
           >
-            <div className="sm:hidden">
-              <SpecularButton
-                size="sm"
-                radius={20}
-                tint="#0A3D91"
-                tintOpacity={0.85}
-                blur={6}
-                textColor="#ffffff"
-                lineColor="#00B4D8"
-                baseColor="#031b45"
-                intensity={1.5}
-                thickness={1}
-                speed={0.4}
-                autoAnimate={true}
-                onClick={() => navigate('/contact')}
-              >
-                <span className="text-[11px] font-bold px-1 py-0.5">Get Free Consultation</span>
-              </SpecularButton>
-            </div>
-
-            <div className="hidden sm:block">
-              <SpecularButton
-                size="lg"
-                radius={28}
-                tint="#0A3D91"
-                tintOpacity={0.85}
-                blur={8}
-                textColor="#ffffff"
-                lineColor="#00B4D8"
-                baseColor="#031b45"
-                intensity={1.5}
-                shineSize={12}
-                shineFade={50}
-                thickness={1.5}
-                speed={0.4}
-                autoAnimate={true}
-                onClick={() => navigate('/contact')}
-              >
+            <StarBorder
+              color="#00d4ff"
+              speed="4s"
+              thickness={1.5}
+              onClick={() => navigate('/contact')}
+              className="cursor-pointer shadow-lg hover:scale-105 transition-transform"
+            >
+              <span className="text-xs sm:text-sm font-bold tracking-wide">
                 Get Free Consultation
-              </SpecularButton>
-            </div>
+              </span>
+            </StarBorder>
 
-            <div className="sm:hidden">
-              <SpecularButton
-                size="sm"
-                radius={20}
-                tint="#ffffff"
-                tintOpacity={0.05}
-                blur={8}
-                textColor="#ffffff"
-                lineColor="#ffffff"
-                baseColor="#525252"
-                intensity={1}
-                thickness={1}
-                speed={0.35}
-                onClick={() => navigate('/services')}
-              >
-                <span className="text-[11px] font-bold px-1 py-0.5">Explore Solutions</span>
-              </SpecularButton>
-            </div>
-
-            <div className="hidden sm:block">
-              <SpecularButton
-                size="lg"
-                radius={28}
-                tint="#ffffff"
-                tintOpacity={0.05}
-                blur={12}
-                textColor="#ffffff"
-                lineColor="#ffffff"
-                baseColor="#525252"
-                intensity={1}
-                shineSize={10}
-                shineFade={40}
-                thickness={1}
-                speed={0.35}
-                onClick={() => navigate('/services')}
-              >
+            <StarBorder
+              color="#3b82f6"
+              speed="6s"
+              thickness={1.5}
+              onClick={() => navigate('/services')}
+              className="cursor-pointer shadow-lg hover:scale-105 transition-transform"
+            >
+              <span className="text-xs sm:text-sm font-bold tracking-wide">
                 Explore Solutions
-              </SpecularButton>
-            </div>
+              </span>
+            </StarBorder>
           </motion.div>
 
           {/* Trust line */}

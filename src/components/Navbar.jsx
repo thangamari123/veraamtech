@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Phone, MessageCircle, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/veraamtech-logo.webp';
-import SpecularButton from './SpecularButton';
+import StarBorder from './StarBorder';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -124,25 +124,15 @@ const Navbar = () => {
           {/* Vertical Divider */}
           <div className="w-px h-8 bg-gray-200 mx-4"></div>
           
-          <SpecularButton
-            size="sm"
-            radius={8}
-            tint="#0A3D91"
-            tintOpacity={0.8}
-            blur={2}
-            textColor="#ffffff"
-            lineColor="#00B4D8"
-            baseColor="#031b45"
-            intensity={1.2}
-            shineSize={10}
-            shineFade={40}
+          <StarBorder
+            color="#00d4ff"
+            speed="5s"
             thickness={1}
-            speed={0.4}
-            autoAnimate={true}
             onClick={() => navigate('/contact')}
+            className="cursor-pointer hover:scale-105 transition-transform"
           >
-            Get Quote
-          </SpecularButton>
+            <span className="text-xs font-bold px-1 py-0.5">Get Quote</span>
+          </StarBorder>
         </div>
 
         {/* Mobile Menu Button (Proportional on mobile) */}
