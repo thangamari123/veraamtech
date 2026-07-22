@@ -1,17 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { testimonials } from '../data/testimonials';
-import { Star, Quote, ChevronLeft, ChevronRight, Users, Shield, Award, Headphones } from 'lucide-react';
-
-/* Multi-color conic gradients for animated running border lines */
-const borderGradients = [
-  'bg-[conic-gradient(from_0deg,#00f2fe,#3b82f6,#a855f7,#00f2fe)]',
-  'bg-[conic-gradient(from_0deg,#a855f7,#ec4899,#06b6d4,#a855f7)]',
-  'bg-[conic-gradient(from_0deg,#10b981,#06b6d4,#3b82f6,#10b981)]',
-  'bg-[conic-gradient(from_0deg,#f59e0b,#ef4444,#a855f7,#f59e0b)]',
-  'bg-[conic-gradient(from_0deg,#3b82f6,#00f2fe,#10b981,#3b82f6)]',
-  'bg-[conic-gradient(from_0deg,#06b6d4,#8b5cf6,#ec4899,#06b6d4)]',
-];
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const quoteColors = [
   'text-cyan-400',
@@ -21,9 +11,6 @@ const quoteColors = [
   'text-blue-400',
   'text-purple-400',
 ];
-
-/* Triple the array for smooth seamless infinite scroll */
-const allCards = [...testimonials, ...testimonials, ...testimonials];
 
 const StarRating = ({ rating }) => (
   <div className="flex gap-1">
@@ -36,105 +23,37 @@ const StarRating = ({ rating }) => (
   </div>
 );
 
-const TestimonialCard = ({ t, index }) => {
-  const quoteColor = quoteColors[index % quoteColors.length];
-
-  return (
-    <div className="flex-shrink-0 w-[270px] sm:w-[350px] md:w-[380px] mx-2.5 sm:mx-3.5">
-      {/* Clean Dark Card without spinning border effect */}
-      <div className="bg-[#050e1d] border border-white/10 hover:border-cyan-500/40 transition-all rounded-2xl sm:rounded-3xl p-5 sm:p-7 text-white h-full flex flex-col justify-between shadow-xl group">
-        
-        {/* Top Row: Quote Icon on Left + Star Rating on Right */}
-        <div className="flex items-center justify-between mb-4">
-          <Quote className={`w-8 h-8 sm:w-10 sm:h-10 ${quoteColor} rotate-180 fill-current opacity-90`} />
-          <StarRating rating={t.rating} />
-        </div>
-
-        {/* Review Text */}
-        <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
-          "{t.text}"
-        </p>
-
-        {/* Bottom Author Row */}
-        <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
-          <div className="flex items-center gap-3 min-w-0">
-            <img
-              src={t.avatar}
-              alt={t.name}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-white/20 flex-shrink-0"
-            />
-            <div className="min-w-0">
-              <h4 className="font-bold text-white text-xs sm:text-sm font-heading leading-tight truncate">
-                {t.name}
-              </h4>
-              <p className="text-[10px] sm:text-xs text-cyan-400/80 font-medium truncate mt-0.5">
-                {t.company}
-              </p>
-            </div>
-          </div>
-
-          {/* Verified Badge */}
-          <span className="text-[9px] sm:text-[10px] font-bold text-green-400 bg-green-950/60 border border-green-500/30 rounded-full px-2 py-0.5 flex-shrink-0 flex items-center gap-1">
-            ✓ Verified
-          </span>
-        </div>
-
-      </div>
-    </div>
-  );
-};
-
 const TestimonialsSection = () => {
-  const trackRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const posRef = useRef(0);
-  const rafRef = useRef(null);
-  const speed = 0.8; // smooth auto-scroll px per frame
 
+  // Auto-play interval: slide 1 card every 3.5 seconds
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
+    if (isPaused) return;
 
-    const singleSetWidth = track.scrollWidth / 3;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 3500);
 
-    const animate = () => {
-      if (!isPaused) {
-        posRef.current += speed;
-        if (posRef.current >= singleSetWidth) {
-          posRef.current -= singleSetWidth;
-        }
-        track.style.transform = `translateX(-${posRef.current}px)`;
-      }
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
+    return () => clearInterval(timer);
   }, [isPaused]);
 
-  const scrollLeft = () => {
-    posRef.current = Math.max(0, posRef.current - 350);
-    if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(-${posRef.current}px)`;
-    }
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const scrollRight = () => {
-    if (trackRef.current) {
-      const singleSetWidth = trackRef.current.scrollWidth / 3;
-      posRef.current = (posRef.current + 350) % singleSetWidth;
-      trackRef.current.style.transform = `translateX(-${posRef.current}px)`;
-    }
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   return (
     <section className="relative py-10 sm:py-12 md:py-16 bg-[#030914] text-white overflow-hidden">
-
-      {/* Ambient background glow */}
+      
+      {/* Ambient Background Glow */}
       <div className="absolute top-0 left-1/3 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/3 w-[400px] h-[400px] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none" />
 
-      <div className="relative z-10">
+      <div className="container mx-auto px-4 md:px-6 max-w-6xl relative z-10">
 
         {/* ── Section Header ── */}
         <motion.div
@@ -142,7 +61,7 @@ const TestimonialsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center px-4 mb-8 md:mb-12"
+          className="text-center mb-8 md:mb-12"
         >
           <div className="inline-flex items-center gap-2 mb-2">
             <span className="w-4 h-px bg-cyan-400/60" />
@@ -171,53 +90,99 @@ const TestimonialsSection = () => {
               ))}
             </div>
             <span className="text-white font-bold text-xs sm:text-sm">5.0</span>
-            <span className="text-gray-400 text-[10px] sm:text-xs">from 500+ clients</span>
+            <span className="text-gray-400 text-[10px] sm:text-xs">from 500+ verified clients</span>
           </div>
         </motion.div>
 
-        {/* ── Carousel Track with Side Arrows ── */}
-        <div className="relative max-w-[1400px] mx-auto px-4 md:px-12">
-          
+        {/* ── Card-by-Card Auto Slider Container ── */}
+        <div 
+          className="relative max-w-4xl mx-auto"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+        >
           {/* Left Arrow Button */}
           <button
-            onClick={scrollLeft}
-            aria-label="Previous Testimonials"
-            className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/5 hover:bg-cyan-500/20 border border-white/15 hover:border-cyan-400 text-white items-center justify-center transition-all z-20 shadow-lg"
+            onClick={handlePrev}
+            aria-label="Previous Testimonial"
+            className="absolute -left-3 sm:-left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-cyan-500/20 border border-white/20 hover:border-cyan-400 text-white flex items-center justify-center transition-all z-20 shadow-2xl active:scale-95"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           {/* Right Arrow Button */}
           <button
-            onClick={scrollRight}
-            aria-label="Next Testimonials"
-            className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/5 hover:bg-cyan-500/20 border border-white/15 hover:border-cyan-400 text-white items-center justify-center transition-all z-20 shadow-lg"
+            onClick={handleNext}
+            aria-label="Next Testimonial"
+            className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-cyan-500/20 border border-white/20 hover:border-cyan-400 text-white flex items-center justify-center transition-all z-20 shadow-2xl active:scale-95"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
-          {/* Edge fade masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-[#030914] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-[#030914] to-transparent z-10 pointer-events-none" />
+          {/* Active Testimonial Card Display with Smooth Fade & Slide */}
+          <div className="px-4 sm:px-10">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -40 }}
+                transition={{ duration: 0.45, ease: 'easeInOut' }}
+                className="bg-[#050e1d] border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-2xl relative"
+              >
+                {/* Quote Icon & Rating */}
+                <div className="flex items-center justify-between mb-5">
+                  <Quote className={`w-10 h-10 sm:w-12 sm:h-12 ${quoteColors[currentIndex % quoteColors.length]} rotate-180 fill-current opacity-90`} />
+                  <StarRating rating={testimonials[currentIndex].rating} />
+                </div>
 
-          {/* Scrolling container */}
-          <div
-            className="overflow-hidden py-3"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onTouchStart={() => setIsPaused(true)}
-            onTouchEnd={() => setIsPaused(false)}
-          >
-            <div
-              ref={trackRef}
-              className="flex will-change-transform"
-              style={{ width: 'max-content' }}
-            >
-              {allCards.map((t, i) => (
-                <TestimonialCard key={i} t={t} index={i} />
-              ))}
-            </div>
+                {/* Review Text */}
+                <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed mb-8 font-normal italic">
+                  "{testimonials[currentIndex].text}"
+                </p>
+
+                {/* Author Info */}
+                <div className="flex items-center justify-between pt-5 border-t border-white/10">
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={testimonials[currentIndex].avatar}
+                      alt={testimonials[currentIndex].name}
+                      className="w-11 h-11 sm:w-13 sm:h-13 rounded-full object-cover border-2 border-cyan-400/50 flex-shrink-0"
+                    />
+                    <div>
+                      <h3 className="font-bold text-white text-sm sm:text-base font-heading leading-tight">
+                        {testimonials[currentIndex].name}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-cyan-400 font-medium mt-0.5">
+                        {testimonials[currentIndex].company}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Verified Badge */}
+                  <span className="text-xs font-bold text-green-400 bg-green-950/70 border border-green-500/40 rounded-full px-3 py-1 flex items-center gap-1.5">
+                    ✓ Verified Client
+                  </span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center items-center gap-2 mt-6">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                aria-label={`Go to testimonial ${idx + 1}`}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? 'w-8 bg-cyan-400' : 'w-2.5 bg-white/20 hover:bg-white/40'
+                }`}
+              />
+            ))}
+          </div>
+
         </div>
 
       </div>
