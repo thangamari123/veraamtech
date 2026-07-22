@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { Shield, Award, Clock, Users } from 'lucide-react';
 import SpecularButton from './SpecularButton';
 import DotGrid from './DotGrid';
+import GradientText from './GradientText';
 
 const stats = [
   { value: '15+',   label: 'Years Experience',   icon: Award },
@@ -90,7 +91,7 @@ const Hero = () => {
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-center font-heading font-black text-white leading-[1.08] tracking-tight mb-6
@@ -98,17 +99,23 @@ const Hero = () => {
           >
             Premium{' '}
             <span className="relative inline-block">
-              <span
-                style={{
-                  display: 'inline-block',
-                  transition: 'opacity 0.4s ease, transform 0.4s ease',
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateY(0)' : 'translateY(-12px)',
-                }}
-                className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent"
+              <GradientText
+                colors={["#00f2fe", "#4facfe", "#00c6ff", "#0072ff", "#9b51e0", "#f093fb", "#00f2fe"]}
+                animationSpeed={3}
+                showBorder={false}
+                className="inline-block"
               >
-                {cyclingWords[wordIndex]}
-              </span>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    transition: 'opacity 0.4s ease, transform 0.4s ease',
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? 'translateY(0)' : 'translateY(-12px)',
+                  }}
+                >
+                  {cyclingWords[wordIndex]}
+                </span>
+              </GradientText>
               {/* underline accent */}
               <motion.span
                 initial={{ scaleX: 0 }}
