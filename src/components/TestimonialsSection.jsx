@@ -37,56 +37,48 @@ const StarRating = ({ rating }) => (
 );
 
 const TestimonialCard = ({ t, index }) => {
-  const gradientClass = borderGradients[index % borderGradients.length];
   const quoteColor = quoteColors[index % quoteColors.length];
 
   return (
     <div className="flex-shrink-0 w-[270px] sm:w-[350px] md:w-[380px] mx-2.5 sm:mx-3.5">
-      {/* Outer Card with Animated Multi-Color Border Line Loop */}
-      <div className="relative p-[1.5px] rounded-2xl sm:rounded-3xl overflow-hidden group shadow-xl">
+      {/* Clean Dark Card without spinning border effect */}
+      <div className="bg-[#050e1d] border border-white/10 hover:border-cyan-500/40 transition-all rounded-2xl sm:rounded-3xl p-5 sm:p-7 text-white h-full flex flex-col justify-between shadow-xl group">
         
-        {/* Continuous Spinning Multi-Color Gradient Line Loop */}
-        <div className={`absolute -inset-[150%] animate-[spin_5s_linear_infinite] ${gradientClass} opacity-85 group-hover:opacity-100 transition-opacity pointer-events-none`} />
-
-        {/* Inner Card Body */}
-        <div className="relative bg-[#050e1d] rounded-[15px] sm:rounded-[23px] p-5 sm:p-7 text-white h-full flex flex-col justify-between z-10">
-          
-          {/* Top Row: Quote Icon on Left + Star Rating on Right */}
-          <div className="flex items-center justify-between mb-4">
-            <Quote className={`w-8 h-8 sm:w-10 sm:h-10 ${quoteColor} rotate-180 fill-current opacity-90`} />
-            <StarRating rating={t.rating} />
-          </div>
-
-          {/* Review Text */}
-          <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
-            "{t.text}"
-          </p>
-
-          {/* Bottom Author Row */}
-          <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
-            <div className="flex items-center gap-3 min-w-0">
-              <img
-                src={t.avatar}
-                alt={t.name}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-white/20 flex-shrink-0"
-              />
-              <div className="min-w-0">
-                <h4 className="font-bold text-white text-xs sm:text-sm font-heading leading-tight truncate">
-                  {t.name}
-                </h4>
-                <p className="text-[10px] sm:text-xs text-cyan-400/80 font-medium truncate mt-0.5">
-                  {t.company}
-                </p>
-              </div>
-            </div>
-
-            {/* Verified Badge */}
-            <span className="text-[9px] sm:text-[10px] font-bold text-green-400 bg-green-950/60 border border-green-500/30 rounded-full px-2 py-0.5 flex-shrink-0 flex items-center gap-1">
-              ✓ Verified
-            </span>
-          </div>
-
+        {/* Top Row: Quote Icon on Left + Star Rating on Right */}
+        <div className="flex items-center justify-between mb-4">
+          <Quote className={`w-8 h-8 sm:w-10 sm:h-10 ${quoteColor} rotate-180 fill-current opacity-90`} />
+          <StarRating rating={t.rating} />
         </div>
+
+        {/* Review Text */}
+        <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+          "{t.text}"
+        </p>
+
+        {/* Bottom Author Row */}
+        <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
+          <div className="flex items-center gap-3 min-w-0">
+            <img
+              src={t.avatar}
+              alt={t.name}
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-white/20 flex-shrink-0"
+            />
+            <div className="min-w-0">
+              <h4 className="font-bold text-white text-xs sm:text-sm font-heading leading-tight truncate">
+                {t.name}
+              </h4>
+              <p className="text-[10px] sm:text-xs text-cyan-400/80 font-medium truncate mt-0.5">
+                {t.company}
+              </p>
+            </div>
+          </div>
+
+          {/* Verified Badge */}
+          <span className="text-[9px] sm:text-[10px] font-bold text-green-400 bg-green-950/60 border border-green-500/30 rounded-full px-2 py-0.5 flex-shrink-0 flex items-center gap-1">
+            ✓ Verified
+          </span>
+        </div>
+
       </div>
     </div>
   );
