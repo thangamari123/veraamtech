@@ -1,0 +1,72 @@
+export const products = [
+  {
+    id: 1,
+    category: 'Indoor LED',
+    slug: 'indoor-p2-5-led-display',
+    name: 'Indoor P2.5 LED Display',
+    pixelPitch: '2.5mm',
+    brightness: '800-1000 nits',
+    cabinetSize: '640x480mm',
+    refreshRate: '3840Hz',
+    warranty: '3 Years',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=2000',
+    description: 'High-definition indoor LED display perfect for boardrooms, retail stores, and control centers.',
+    applications: ['Conference Rooms', 'Retail Stores', 'Control Centers', 'Broadcast Studios']
+  },
+  {
+    id: 2,
+    category: 'Outdoor LED',
+    slug: 'outdoor-p4-led-display',
+    name: 'Outdoor P4 High-Brightness LED',
+    pixelPitch: '4.0mm',
+    brightness: '6000-8000 nits',
+    cabinetSize: '960x960mm',
+    refreshRate: '3840Hz',
+    warranty: '5 Years',
+    image: 'https://images.unsplash.com/photo-1563241527-2009cb7b64ce?auto=format&fit=crop&q=80&w=2000',
+    description: 'Robust outdoor LED display with exceptional brightness and IP65 waterproof rating.',
+    applications: ['Digital Billboards', 'Stadiums', 'Building Facades', 'Transportation Hubs']
+  },
+  {
+    id: 3,
+    category: 'Fine Pixel Pitch',
+    slug: 'fine-pitch-p1-2',
+    name: 'Ultra-Fine P1.2 LED Display',
+    pixelPitch: '1.25mm',
+    brightness: '600 nits',
+    cabinetSize: '600x337.5mm',
+    refreshRate: '3840Hz',
+    warranty: '3 Years',
+    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=2000',
+    description: 'Ultra-fine pixel pitch LED for critical viewing applications demanding the highest resolution.',
+    applications: ['Command Centers', 'Executive Boardrooms', 'Design Studios', 'High-end Retail']
+  },
+  {
+    id: 4,
+    category: 'LCD Displays',
+    slug: 'commercial-lcd-55',
+    name: '55" Commercial LCD Video Wall',
+    pixelPitch: 'N/A',
+    brightness: '700 nits',
+    cabinetSize: '55 inch',
+    refreshRate: '60Hz',
+    warranty: '3 Years',
+    image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&q=80&w=2000',
+    description: 'Ultra-narrow bezel LCD displays designed to be tiled together for impressive video wall arrays.',
+    applications: ['Control Rooms', 'Shopping Malls', 'Corporate Lobbies', 'Airports']
+  },
+  {
+    id: 5,
+    category: 'Digital Signage',
+    slug: 'floor-standing-kiosk-43',
+    name: '43" Interactive Floor Kiosk',
+    pixelPitch: 'N/A',
+    brightness: '450 nits',
+    cabinetSize: '43 inch',
+    refreshRate: '60Hz',
+    warranty: '2 Years',
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2000',
+    description: 'Interactive digital signage kiosk perfect for wayfinding, self-service, and advertising.',
+    applications: ['Hospitals', 'Malls', 'Hotels', 'Museums']
+  }
+];
