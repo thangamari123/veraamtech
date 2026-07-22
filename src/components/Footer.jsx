@@ -5,7 +5,7 @@ import logo from '../assets/veraamtech-logo.webp';
 
 const Footer = () => {
   const [openSections, setOpenSections] = useState({
-    quickLinks: true,
+    quickLinks: false,
     topSolutions: false,
     contactInfo: false,
   });
