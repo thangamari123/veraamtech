@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Phone, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, MonitorPlay, Presentation, LayoutDashboard, Package, Factory } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/veraamtech-logo.webp';
 import StarBorder from './StarBorder';
@@ -27,9 +27,9 @@ const Navbar = () => {
       path: '/services', 
       hasDropdown: true,
       children: [
-        { name: 'LED Video Walls', path: '/services/led-video-wall-solutions' },
-        { name: 'Digital Signage', path: '/services/digital-signage' },
-        { name: 'Commercial Displays', path: '/services/commercial-display-systems' },
+        { name: 'LED Video Walls', path: '/services/led-video-wall-solutions', icon: MonitorPlay },
+        { name: 'Digital Signage', path: '/services/digital-signage', icon: Presentation },
+        { name: 'Commercial Displays', path: '/services/commercial-display-systems', icon: LayoutDashboard },
         { name: 'View All Services →', path: '/services', isHighlight: true },
       ] 
     },
@@ -38,8 +38,8 @@ const Navbar = () => {
       path: '/projects', 
       hasDropdown: true,
       children: [
-        { name: 'Products Catalog', path: '/products' },
-        { name: 'Industries We Serve', path: '/industries' },
+        { name: 'Products Catalog', path: '/products', icon: Package },
+        { name: 'Industries We Serve', path: '/industries', icon: Factory },
         { name: 'View All Projects →', path: '/projects', isHighlight: true },
       ] 
     },
@@ -79,17 +79,18 @@ const Navbar = () => {
               return (
                 <div key={link.name} className="relative group">
                   {link.hasDropdown ? (
-                    <button
+                    <Link
+                      to={link.path}
                       className={`flex items-center text-sm xl:text-[15px] font-semibold transition-colors py-2 px-3 rounded-lg ${isActive ? 'text-[#0A3D91]' : 'text-gray-700 hover:text-[#0A3D91] hover:bg-gray-50'}`}
                       onMouseEnter={() => setActiveDropdown(link.name)}
                       onMouseLeave={() => setActiveDropdown(null)}
-                      onClick={() => setActiveDropdown(activeDropdown === link.name ? null : link.name)}
+                      onClick={() => setActiveDropdown(null)}
                     >
                       {link.name} <ChevronDown className="ml-1 w-3.5 h-3.5" />
                       {isActive && (
                         <motion.div layoutId="nav-indicator" className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#0A3D91]" />
                       )}
-                    </button>
+                    </Link>
                   ) : (
                     <Link
                       to={link.path}
@@ -119,12 +120,13 @@ const Navbar = () => {
                               <Link
                                 key={idx}
                                 to={child.path}
-                                className={`px-6 py-2.5 text-xs sm:text-sm transition-colors ${
+                                className={`px-6 py-2.5 text-xs sm:text-sm transition-colors flex items-center ${
                                   child.isHighlight
-                                    ? 'text-primary font-bold hover:bg-gray-50 border-t border-gray-100 mt-1 pt-3'
-                                    : 'text-gray-700 hover:bg-gray-50 hover:text-primary'
+                                    ? 'text-primary font-bold hover:bg-gray-50 border-t border-gray-100 mt-1 pt-3 justify-center'
+                                    : 'text-gray-700 hover:bg-gray-50 hover:text-primary gap-2.5'
                                 }`}
                               >
+                                {child.icon && !child.isHighlight && <child.icon className="w-4 h-4 text-blue-500" />}
                                 {child.name}
                               </Link>
                             ))}
@@ -189,15 +191,25 @@ const Navbar = () => {
                     const isSubOpen = mobileSubmenu === link.name;
                     return (
                       <div key={link.name} className="border-b border-gray-100 py-1">
-                        <button
-                          onClick={() => toggleMobileSubmenu(link.name)}
-                          className={`w-full flex items-center justify-between py-2 px-3 rounded-xl text-sm font-bold transition-colors ${
+                        <div
+                          className={`w-full flex items-center justify-between rounded-xl transition-colors ${
                             isActive ? 'text-blue-600 bg-blue-50/60' : 'text-gray-800 hover:bg-gray-50'
                           }`}
                         >
-                          <span>{link.name}</span>
-                          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSubOpen ? 'rotate-180 text-blue-600' : 'text-gray-400'}`} />
-                        </button>
+                          <Link 
+                            to={link.path} 
+                            onClick={() => setIsOpen(false)}
+                            className="flex-1 py-2 pl-3 text-sm font-bold"
+                          >
+                            {link.name}
+                          </Link>
+                          <button 
+                            onClick={() => toggleMobileSubmenu(link.name)}
+                            className="p-2 pr-3"
+                          >
+                            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSubOpen ? 'rotate-180 text-blue-600' : 'text-gray-400'}`} />
+                          </button>
+                        </div>
 
                         {/* Collapsible Mobile Submenu */}
                         <AnimatePresence>
@@ -213,12 +225,13 @@ const Navbar = () => {
                                   key={idx}
                                   to={child.path}
                                   onClick={() => setIsOpen(false)}
-                                  className={`block py-2 px-3 text-xs font-semibold rounded-lg transition-colors ${
+                                  className={`py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center ${
                                     child.isHighlight
-                                      ? 'text-blue-600 font-bold bg-blue-100/50'
-                                      : 'text-gray-600 hover:text-gray-900 hover:bg-white'
+                                      ? 'text-blue-600 font-bold bg-blue-100/50 justify-center'
+                                      : 'text-gray-600 hover:text-gray-900 hover:bg-white gap-2'
                                   }`}
                                 >
+                                  {child.icon && !child.isHighlight && <child.icon className="w-3.5 h-3.5 text-blue-500" />}
                                   {child.name}
                                 </Link>
                               ))}
